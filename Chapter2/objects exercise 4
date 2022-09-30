@@ -1,0 +1,15 @@
+const obj1 = {
+   first: 'Mike',
+   first : 'Laurence',
+   last : 'Svekis',
+   id : 100,
+   status:true,
+   arr : arr,
+   'full name' : 'LSvekis'
+};
+console.log(obj1);
+console.log(obj1.first);
+console.log(obj1['first']);
+console.log(obj1['full name']);
+obj1.last = 'Hello World';
+console.log(obj1);
