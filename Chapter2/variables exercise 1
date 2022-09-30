@@ -1,0 +1,10 @@
+let first = 'Laurence';
+const last = 'Svekis';
+let spaceChar = ' ';
+console.log(first + spaceChar + last);
+let fullName = first + spaceChar + last;
+first = 'Mike';
+console.log(first + spaceChar + last);
+
+let a,b,c,d;
+console.log(a);
