@@ -1,0 +1,14 @@
+const myInput = document.querySelector('input');
+myInput.setAttribute('type','number');
+myInput.setAttribute('min','1');
+myInput.setAttribute('max','10');
+myInput.setAttribute('required','');
+myInput.value = '5';
+
+img1.setAttribute('src','//via.placeholder.com/150');
+img1.setAttribute('id','img2');
+
+const hyperL = document.createElement('a');
+hyperL.textContent = 'Click me';
+hyperL.setAttribute('href','http://www.google.com');
+hyperL.setAttribute('target','_blank');
