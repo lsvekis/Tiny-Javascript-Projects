@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>JavaScript Course</title>
+ <style>
+   * {
+     box-sizing: border-box;
+   }
+   .output,
+   input,
+   btn {
+     font-size: 1em;
+     width: 50%;
+     text-align: center;
+     margin: auto;
+   }
+   .btn {
+     background-color: black;
+     color: white;
+     width: 50%;
+     display: block;
+     padding: 5px;
+     margin: 10px auto;
+   }
+ 
+   .curw {
+     font-size: 1.2em;
+     color: #000;
+     padding: 10px;
+   }
+   .nextw {
+     font-size: 0.9em;
+     color: #333;
+     padding: 10px;
+   }
+ </style>
+</head>
+<body>
+ <div class="main"></div>
+ <script src="/js/app.js"></script>
+</body>
+</html>
+
+const main = document.querySelector('.main');
+const words = ['JavaScript', 'cat', 'dog', 'people', 'code', 'rat', 'monkey', 'duck', 'horse'];
+const game = {
+   inplay: false,
+   cur: 0,
+   timer: null,
+   num: 3,
+   arr1: [],
+   arr2: [],
+   start: null,
+   end: null
+};
+const timerVal = createEles('div', main, '', 'output');
+const output = createEles('div', main, 'Press Start', 'output');
+const txtArea = createEles('input', main, '', 'txtArea');
+txtArea.setAttribute('type', 'text');
+txtArea.style.display = 'none';
+const btn = createEles('button', main, 'Start', 'btn');
+ 
+btn.onclick = startGame;
+txtArea.addEventListener('keydown', keyChecker);
+ 
+function keyChecker(e) {
+   if (e.code == 'Enter' || e.code == 'Space') {
+       game.cur++;
+       game.arr2.push(txtArea.value.trim());
+       txtArea.value = '';
+       showWords();
+   };
+}
+ 
+function buildArray() {
+   game.arr1.length = 0;
+   let lastindex;
+   while (game.arr1.length < game.num) {
+       const ranIndex = Math.floor(Math.random() * words.length);
+       if (lastindex != ranIndex) {
+           game.arr1.push(words[ranIndex]);
+           lastindex = ranIndex;
+       }
+   }
+   console.log(game.arr1);
+}
+ 
+function startGame() {
+   buildArray();
+   game.cur = 0;
+   game.timer = null;
+   game.arr2.length = 0;
+   game.start = null;
+   game.end = null;
+   btn.style.display = 'none';
+   let counter = 5;
+   output.textContent = `Get Ready ${counter}`;
+   game.timer = setInterval(() => {
+       output.textContent = `Get Ready ${counter}`;
+       counter--;
+       if (counter <= 0) {
+           clearInterval(game.timer);
+           gamePlay();
+           txtArea.style.display = 'block';
+       }
+   }, 100);
+}
+ 
+function gamePlay() {
+   game.start = new Date().getTime();
+   game.inplay = true;
+   txtArea.focus();
+   showWords();
+   let mins, secs, millis;
+   game.timer = setInterval(() => {
+       timerVal.textContent = outputTimer();
+   }, 10);
+}
+ 
+ 
+function outputTimer() {
+   const diff = new Date().getTime() - game.start;
+   mins = parseInt(diff / 1000 / 60);
+   mins = mins < 10 ? '0' + mins : mins;
+   secs = parseInt(diff / 1000);
+   secs = secs < 10 ? '0' + secs : secs;
+   if (secs > 60) secs %= 60;
+   millis = diff;
+   if (millis > 1000) millis %= 1000;
+   return `${mins}:${secs}:${millis}`;
+}
+ 
+function gameOver() {
+   timerVal.style.display = 'none';
+   txtArea.style.display = 'none';
+   btn.style.display = 'block';
+   btn.textContent = 'Restart Game';
+   if (game.timer) {
+       clearInterval(game.timer);
+   }
+   let total;
+   let tacc = 0;
+   let html = '';
+   game.arr2.forEach((val, ind) => {
+       let aru = 0;
+       const correct = game.arr1[ind];
+       console.log(correct);
+       [...correct].forEach((letter, i) => {
+           if (letter == val[i]) {
+               aru++;
+           }
+       })
+       const accuracy = aru == 0 ? 0 : Math.floor((aru / correct.length) * 100);
+       tacc += accuracy;
+       html += `<div>${val} (${game.arr1[ind]}) accuracy ${accuracy}%</div>`;
+   })
+   console.log(tacc);
+   console.log(game.arr2.length);
+   total = Math.floor(tacc / game.arr2.length);
+   output.innerHTML = `<div>Total Accuracy ${total}% with a time of ${outputTimer()}</div>${html}`;
+}
+ 
+function showWords() {
+   output.innerHTML = '';
+   if (game.inplay) {
+       if (game.cur >= game.num) {
+           gameOver();
+           game.inplay = false;
+           console.log('game over');
+       } else {
+           const w = game.arr1[game.cur];
+           const curWord = createEles('span', output, w, 'curw');
+       }
+       if (game.cur + 1 < game.num) {
+           const n = game.arr1[game.cur + 1];
+           const nextWord = createEles('span', output, n, 'nextw');
+       }
+   }
+}
+ 
+function createEles(t, p, html, cla) {
+   const ele = document.createElement(t);
+   ele.innerHTML = html;
+   ele.classList.add(cla);
+   return p.appendChild(ele);
+}
