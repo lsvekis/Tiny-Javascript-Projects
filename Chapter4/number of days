@@ -1,0 +1,20 @@
+const main = document.querySelector('.main');
+const myInput = document.createElement('input');
+const btn = document.createElement('button');
+const output = document.createElement('div');
+main.append(output);
+main.append(myInput);
+main.append(btn);
+btn.textContent = 'Get Results';
+myInput.setAttribute('type','date');
+btn.addEventListener('click',()=>{
+   const selDate = new Date(myInput.value);
+   const curDate = new Date();
+   const diff = curDate.getTime() - selDate.getTime();
+   console.log(diff);
+   const days = parseInt(diff/1000/60/60/24);
+   const hours = parseInt(diff/1000/60/60);
+   const minutes = parseInt(diff/1000/60);
+   console.log(days);
+   output.innerHTML = `<div>Days : ${days}</div><div>Hours : ${hours}</div><div>Minutes : ${minutes}</div>`;
+})
