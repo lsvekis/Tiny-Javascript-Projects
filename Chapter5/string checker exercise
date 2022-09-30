@@ -1,0 +1,27 @@
+  <div class="output">
+    <textarea name="txtarea"></textarea> <br>
+    <button>Checker</button>
+    <div class="results"></div>
+  </div>
+
+const txtArea = document.querySelector('textarea');
+const btn = document.querySelector('button');
+const res = document.querySelector('.results');
+const str1 = 'Hello World.  I love JavaScript!';
+txtArea.value = str1;
+ 
+const rexg = /love/g;
+btn.addEventListener('click',()=>{
+    const txt =  txtArea.value;
+    const finder = [...txt.matchAll(rexg)];
+    let html = '';
+    if(finder!=null) {
+        finder.forEach((r,i)=>{
+            html += `<div>Found ${r[0]} at index value ${r.index}</div>`;
+        })
+    }else{
+        html = 'Not found in the string';
+    }
+    res.innerHTML = html;
+})
+
