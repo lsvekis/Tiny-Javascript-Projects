@@ -1,0 +1,8 @@
+let counter = 0;
+console.log(adder());
+console.log(adder());
+console.log(adder());
+function adder(){
+   counter++;
+   return counter;
+}
