@@ -1,0 +1,23 @@
+ul.childNodes.forEach(el=>{
+    console.log(el.textContent);
+})
+
+const ul = document.createElement('ul');
+document.body.append(ul);
+for(let i=0;i<9;i++){
+    const li = document.createElement('li');
+    li.textContent = ` Item ${i+1}`;
+    li.onclick = ()=>{
+        const par = li.parentNode;
+        console.log('First ' + par.firstChild.textContent);
+        console.log('Last ' + par.lastChild.textContent);
+        console.log('Current ' + li.textContent);
+        if(li.nextSibling != null){
+            console.log('Next ' + li.nextSibling.textContent);
+        }
+        if(li.previousSibling != null){
+            console.log('Previous ' + li.previousSibling.textContent);
+        }
+    }
+    ul.append(li);
+}
