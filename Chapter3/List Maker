@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript DOM</title>
+</head>
+<body>
+    <div class="output"></div>
+    <input type="number">
+    <script src="/js/app.js"></script>
+</body>
+</html>
+
+const myVal = document.querySelector('input');
+const main = document.querySelector('.output');
+myVal.addEventListener('change',()=>{
+    main.innerHTML = '';
+    const ul = document.createElement('ul');
+    main.append(ul);
+   if(!isNaN(myVal.value)){
+       for(let i=0;i<myVal.value;i++){
+           const li = document.createElement('li');
+           li.textContent = `Index ${i}`;
+           ul.append(li);
+       }
+   }
+})
