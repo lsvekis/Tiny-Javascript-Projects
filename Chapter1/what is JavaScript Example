@@ -1,0 +1,9 @@
+let cash = 5,bread = 0,x = 0,y = 0;
+while(x<10) x++;
+while(y<5) y++;
+if(x==10&&y==5){
+  bread+=1;
+  cash-=5;
+}
+while(x>0) x--;
+while(y>0) y--;
