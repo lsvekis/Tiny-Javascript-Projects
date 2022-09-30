@@ -1,0 +1,13 @@
+const start = new Date('July 1, 2000');
+const end = new Date('August 1 2000')
+console.log(start.getTime());
+console.log(end.getTime());
+const diff = end.getTime() - start.getTime();
+console.log(diff);
+
+
+const seconds = parseInt(diff/1000);
+const minutes = parseInt(diff/1000/60);
+const hours = parseInt(diff/1000/60/60);
+const days = parseInt(diff/1000/60/60/24);
+console.log(days,hours,minutes,seconds);
