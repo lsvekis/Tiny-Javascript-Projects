@@ -1,0 +1,52 @@
+const main = document.querySelector('.main');
+const timer = document.createElement('div');
+const btn1 = document.createElement('button');
+const btn2 = document.createElement('button');
+const game = {timer:null,start:null,end:null};
+main.append(timer);
+main.append(btn1);
+main.append(btn2);
+btn1.style.backgroundColor = 'green';
+btn2.style.backgroundColor = 'red';
+btn1.style.color = 'white';
+btn2.style.color = 'white';
+btn1.textContent = 'Start';
+btn2.textContent = 'Stop';
+btn2.disabled = true;
+btn1.addEventListener('click',startTimer);
+btn2.addEventListener('click',endTimer);
+function startTimer(){
+   console.log('start');
+   showTimer();
+   btn1.disabled = true;
+   btn2.disabled = false;
+   const date = new Date();
+   game.start = date.getTime();
+}
+function endTimer(){
+   console.log('end');
+   btn1.disabled = false;
+   btn2.disabled = true;
+   const date = new Date();
+   game.end = date.getTime();
+   const totalTime = ((game.end-game.start)/1000);
+   console.log(totalTime);
+   if(game.timer){
+       clearInterval(game.timer);
+   }
+}
+function showTimer(){
+   let mins,secs,millis;
+   game.timer = setInterval(()=>{
+       const diff = new Date().getTime() - game.start;
+       mins = parseInt(diff/1000/60);
+       mins = mins < 10 ? '0'+mins : mins;
+       secs = parseInt(diff/1000);
+       secs = secs < 10 ? '0'+secs : secs;
+       if(secs>60) secs %= 60;
+       millis = diff;
+       if(millis>1000) millis %= 1000;
+       timer.textContent = `${mins}:${secs}:${millis}`;
+   },10);
+}
+
