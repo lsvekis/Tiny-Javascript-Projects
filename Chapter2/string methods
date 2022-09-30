@@ -1,0 +1,20 @@
+fullName.slice(0,8);
+fullName.slice(-5);
+console.log(fullName.length);
+fullName.substring(0,8);
+fullName.substring(9);
+
+capWord(fullName);
+function capWord(words){
+   const arr = words.split(' ');
+   const temp = [];
+   arr.forEach(word =>{
+       temp.push(word[0].toUpperCase()+word.slice(1).toLowerCase());
+   })
+   return temp.join(' ');
+}
+
+let val = fullName.toLowerCase().indexOf('e');
+val = fullName.toLowerCase().lastIndexOf('e');
+val = fullName.toLowerCase().search('ve');
+console.log(val);
