@@ -1,0 +1,50 @@
+const arr = ['Laurence','Svekis',100,'',null];
+arr.push('end');
+arr.unshift('start');
+arr.pop();
+arr.shift();
+
+const arr1 = arr.map((item,index,array)=>`${index} ${item}`);
+const arr2 = arr.concat(arr1,arr1); //merge two or more arrays together
+const arr3 = arr.concat(['one','two']); //add values to the end of an array
+const arr5 = arr.concat();  //duplicate array
+
+arr5.length = 0;
+const arr6  = arr.filter((val)=>{
+   return (typeof val == 'number')
+})
+const arr7 = arr.filter(Boolean);
+
+const str1 = arr.toString();
+const str2 = arr.filter(Boolean).join(' - ');
+
+arr7.sort();
+console.log(arr7);
+arr7.reverse();
+
+const arr8 = [5,6,78,32,5,54,7,7,7,45,54334];
+arr8.sort((a,b)=>{
+   return a-b});
+console.log(arr8);
+arr8.sort((a,b)=>{
+   return b-a});
+console.log(arr8);
+
+arr8.sort((a,b)=>{return Math.random()-0.5})
+   const ind = Math.floor(Math.random()*arr.length);
+   console.log(arr[ind]);
+const arr9 = [0,1,2,3,4,5,6];
+const val1 = arr9.splice(3,2,'X','X');
+const ind1 = arr9.indexOf('X');
+const ind2 = arr9.lastIndexOf('X');
+const ind3 = arr9.findIndex((item)=>{
+   if(item=='X'){
+       return item;
+   }
+});
+const first = `lauREnce`;
+const last = `svEKis`;
+const fullName = `${first} ${last}`;
+let val = `${4+5+6}
+   test
+   test`;
