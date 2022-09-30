@@ -4,3 +4,24 @@ console.log(a+b);
 console.log(a*b);
 console.log(a-b);
 console.log(a/b);
+
+a += 5;
+a = a + 5;
+
+let first = 'Laurence';
+let last = 'Svekis';
+let full = first + ' ' + last;
+console.log(full);
+
+let d = '5';
+let e = 9;
+console.log(e + e + e + d);  //Result 275
+console.log(d + e + e + e);  //Result 5999
+
+let boo = (4 == 4);
+boo = (4 != 4);
+boo = (4 > 4);
+boo = (4 >= 4);
+boo = ('4' === 4);
+boo = ('4' !== 4);
+console.log(boo);
