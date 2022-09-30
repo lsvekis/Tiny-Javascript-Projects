@@ -1,0 +1,10 @@
+const hypers = document.querySelectorAll('a');
+hypers.forEach(ele =>{
+    if(ele.hasAttribute('target')){
+        if(ele.getAttribute('target') != '_blank'){
+            ele.setAttribute('target','_blank');
+        }
+    }else{
+        ele.setAttribute('target','_blank');
+    }
+})
