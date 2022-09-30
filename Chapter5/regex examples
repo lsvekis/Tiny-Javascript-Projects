@@ -1,0 +1,27 @@
+///Regular expression literal
+const myPattern1 = /a/;
+
+///RegExp constructor object
+const myPattern2 = new RegExp('a');
+
+
+const myPattern1 = /a/;
+const myPattern2 = new RegExp('a');
+const myStr = 'Hello World this is my new regular expression.';
+const result1 = myStr.match(myPattern1);
+const result2 = myStr.match(myPattern2);
+console.log(result1);
+console.log(result2);
+
+const txt = 'Hello World.  I love JavaScript!';
+const rexg = /love/g;
+const rex = /love/;
+const finder1 = txt.match(rex);
+console.log(finder1);
+const finder2 = txt.match(rexg);
+console.log(finder2);
+
+const txt = 'Hello World.  I love JavaScript!';
+const rexg = /love/g;
+const finder = [...txt.matchAll(rexg)];
+console.log(finder);
