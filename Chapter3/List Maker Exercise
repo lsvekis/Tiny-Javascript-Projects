@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+  <title>JavaScript DOM</title>
+  <style>
+    .striker {
+      text-decoration: line-through;
+      color: red;
+      cursor: grab;
+    }
+ 
+    .btns {
+      margin: 0 5px;
+      font-size: 0.7em;
+      color: white;
+    }
+ 
+    ul,
+    li {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+ 
+    .content {
+      font-size: 1.2em;
+      padding: 3px;
+      width: 50%;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Laurence Svekis</h1>
+  <div class="main"></div>
+  <script src="/js/app16.js"></script>
+</body>
+</html>
+
+const main = document.querySelector('.main');
+const ul = adder('ul',main,'ul','' );
+const inEle = adder('input',main,'input','' );
+const btn = adder('button',main,'btn','Add New' );
+inEle.setAttribute('type','text');
+inEle.setAttribute('placeholder','List Item');
+btn.addEventListener('click',newListItem);
+ 
+function newListItem(){
+    const li = adder('li',ul,'li');
+    const ele = adder('span',li,'content',inEle.value);
+    const delEle = adder('button',li,'btns','Remove');
+    const ediEle = adder('button',li,'btns','Edit');
+    ele.setAttribute('contenteditable','false');
+    delEle.style.backgroundColor = 'red';
+    ediEle.style.backgroundColor = 'green';
+    ele.onclick = ()=>{
+        if(ele.getAttribute('contenteditable') == 'false'){
+            ele.classList.toggle('striker');
+        }
+    }
+    delEle.onclick = ()=>{
+        delEle.parentNode.remove();
+    }
+    ediEle.onclick = ()=>{
+       if(ele.getAttribute('contenteditable') == 'true'){
+            ele.setAttribute('contenteditable','false');
+            li.style.backgroundColor = '#fff';
+            ediEle.textContent = 'Edit';
+            ediEle.style.backgroundColor = 'green';
+       }else{
+            ele.setAttribute('contenteditable','true');
+            ele.classList.remove('striker');
+            li.style.backgroundColor = '#ddd';
+            ediEle.textContent = 'Save';
+            ediEle.style.backgroundColor = 'blue';
+       }
+    }
+    inEle.value = '';
+}
+ 
+function adder(t,parent,c,tc){
+    const ul = document.createElement(t);
+    ul.classList.add(c);
+    ul.textContent = tc;
+    return parent.appendChild(ul);
+}
