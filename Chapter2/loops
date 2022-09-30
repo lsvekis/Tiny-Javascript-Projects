@@ -1,0 +1,63 @@
+for(let i=0;i<10;i++){
+   console.log(i);
+}
+
+for (let i = 10; i > 0; i--) {
+   console.log(i);
+}
+
+let i = 0;
+while (i < 10) {
+   console.log(i);
+   i++;
+}
+
+let i = 0;
+do {
+   console.log(i);
+   i++;
+}
+while (i < 10);
+
+const arr = ['Laurence', 'Svekis', 555, 323, 12];
+for (let i = 0; i < arr.length; i++) {
+   console.log(arr[i]);
+}
+ 
+i = 0;
+while (i < arr.length) {
+   console.log(arr[i]);
+   i++;
+}
+
+arr.forEach((item, index, array) => {
+   console.log(item);
+})
+
+const obj1 = {
+   first: 'Laurence',
+   last: 'Svekis',
+   id: 100
+}
+ 
+for (key in obj1) {
+   console.log(obj1[key]);
+}
+
+looper1(0);
+looper2(0);
+function looper1(x) {
+   console.log(x);
+   x++;
+   if (x < 10) {
+       looper1(x);
+   }
+}
+ 
+function looper2(x) {
+   console.log(x);
+   x++;
+   if (x < 10) {
+       return looper2(x);
+   }
+}
