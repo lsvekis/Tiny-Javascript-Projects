@@ -1,0 +1,11 @@
+btn.addEventListener('click',maker);
+function maker(){
+    const fileName = 'myFile.txt';
+    const a = document.createElement('a');
+    a.setAttribute('href','data:text/plain;charset=utf-8,'+encodeURIComponent('hello world'));
+    a.setAttribute('download',fileName);
+    a.style.display='none';
+    document.body.append(a);
+    a.click();
+    document.body.removeChild(a);    
+}
