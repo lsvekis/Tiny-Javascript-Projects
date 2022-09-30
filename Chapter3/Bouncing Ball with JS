@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript DOM</title>
+</head>
+<body>
+  <div class="main"></div>
+  <script src="/js/app.js"></script>
+</body>
+</html>
+
+const main = document.querySelector('.main');
+const b = {x:50,y:30,w:40,h:40,dx:1,dy:1,speed:5,ani:{}}
+ 
+main.style.width = '600px';
+main.style.height = '400px';
+main.style.backgroundColor = 'black';
+const ball = document.createElement('div');
+ 
+ball.style.backgroundColor = 'red';
+ball.style.borderRadius = '50%';
+ball.style.width = `${b.w}px`
+ball.style.height = `${b.h}px`
+ball.style.position = 'relative';
+ball.style.left = `${b.x}px`;
+ball.style.top = `${b.y}px`;
+main.append(ball);
+
+b.ani = requestAnimationFrame(mover);
+ 
+function mover(){
+    if(b.x>600-b.w || b.x < 0){
+        b.dx *= -1;
+    }
+    if(b.y>400-b.h || b.y < 0 ){
+        b.dy *= -1;
+    }
+    b.x += b.dx * b.speed;
+    b.y += b.dy * b.speed;
+    ball.style.left = `${b.x}px`;
+    ball.style.top = `${b.y}px`;
+        b.ani = requestAnimationFrame(mover);
+}
+
