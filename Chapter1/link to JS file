@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>JavaScript Course</title>   
+  </head>
+  <body>
+      <div class="output">Output 1</div>
+      <script src="app.js"></script>
+  </body>
+</html>
+
+
+console.log("Hello");
