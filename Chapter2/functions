@@ -1,0 +1,42 @@
+const fun1 = function(a,b){
+   console.log(a + b);
+}
+fun1(3,5);
+fun1(6,7);
+fun1(8,4);
+fun1(2,6);
+
+fun2(3,5);
+function fun2(a,b){
+   console.log(a + b);
+}
+
+const fun3 = (a,b)=>{
+   console.log(a+b);
+}
+fun3(8,4);
+fun3(2,6);
+const fun4 = (a,b)=> console.log(a+b);
+fun4(8,4);
+fun4(2,6);
+
+(function(){
+   console.log('JS ready');
+})();  //IIFE
+ 
+(()=>{
+   console.log('iife 1');
+})();
+ 
+(()=>console.log('iife 2'))();
+
+function fun7(a,b){
+   a = a || 10;
+   b = b || 50;
+   console.log(a,b);
+   return a + b;
+}
+function fun8(a=10,b=50){
+   console.log(a,b);
+   return a + b;
+}
