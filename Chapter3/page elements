@@ -1,0 +1,23 @@
+const output1 = document.querySelector('.output');
+const output2 = document.createElement('div');
+document.body.append(output2);
+document.body.prepend(output2);
+
+const res1 = output1.append(output2);
+const res2 = output1.appendChild(output2);
+
+output1.removeChild(output2);
+output2.parentNode.removeChild(output2);
+
+ele.style.display = 'inline-block';
+ele.style.border = '1px solid #eee';
+ele.style.width = '100px';
+ele.style.fontFamily = 'Arial';
+ele.style.color = 'red';
+ele.style.border = '1px solid #ddd';
+ele.style.display = 'none';
+ele.style.padding = '10px';
+ele.style.margin = '10px';
+ele.style.width = '200px';
+ele.style.textAlign = 'right';
+ele.style.backgroundColor = 'yellow';
