@@ -1,0 +1,29 @@
+const main = document.querySelector('.main');
+const output = document.createElement('div');
+const btn1 = document.createElement('button');
+const btn2 = document.createElement('button');
+main.append(output);
+main.append(btn1);
+main.append(btn2);
+ 
+btn1.textContent = 'Start';
+btn2.textContent = 'Stop';
+ 
+let intVal;
+let val = 0;
+ 
+btn1.onclick = ()=>{
+   if(!intVal){
+       intVal= setInterval(counter,1);
+   }
+  
+}
+btn2.onclick = ()=>{
+   clearInterval(intVal);
+   intVal = null;
+}
+ 
+function counter(){
+   val += 1;
+   output.textContent = val;
+}
