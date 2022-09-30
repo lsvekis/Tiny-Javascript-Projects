@@ -1,0 +1,7 @@
+/*
+This content
+will be skipped by
+the browser
+*/
+console.log("Hello");  // Single Comment
+// console.log("Hello"); Code won't run now
