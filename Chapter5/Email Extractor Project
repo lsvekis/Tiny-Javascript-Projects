@@ -1,0 +1,84 @@
+<div>
+    <label for="txtContent">Add Text Content</label>
+    <textarea id="txtContent"></textarea>
+    <label for="sep">Email separator</label>
+    <select id="sep">
+      <option value=", " selected>,</option>
+      <option value=" - " >-</option>
+      <option value=" " >space</option>
+      <option value=" _ " >_</option>
+      <option value="; " >;</option>
+    </select>
+    <div><button class="btn1">Get Emails</button></div>
+    <div class="results"></div>
+  </div>
+
+    label{
+      display:block;
+    }
+    textarea{
+      width:90%;
+      min-height:40px;
+    }
+    .btn1{
+      margin-top:10px;
+    }
+    .btn{
+      display:block;
+      background-color:black;
+      color:white;
+    }
+    .box{
+      padding:10px;
+      border:1px solid #ddd;
+    }
+
+const txt1 = document.querySelector('#txtContent');
+const btn = document.querySelector('button');
+const res = document.querySelector('.results');
+const sel = document.querySelector('#sep');
+btn.addEventListener('click',getEmails);
+function getEmails(){
+    const temp = txt1.value;
+    const regexp = /([A-Za-z0-9._-]+@[A-Za-z0-9._-]+\.[A-Za-z0-9._-]+)/gi;
+    const emailsRaw = temp.match(regexp);
+    const emails = [];
+    if(emailsRaw != null ){
+        emailsRaw.forEach(email =>{
+            if(!emails.includes(email)){
+                emails.push(email);
+            }
+        });
+    }
+    const main = document.createElement('div');
+    main.classList.add('box');
+    res.append(main);
+    const div = document.createElement('div');
+    div.textContent = `Found emails : (${emails.length})`;
+    main.append(div);
+    if(emails.length > 0){
+        const txta= document.createElement('textarea');
+        const myEmails = emails.join(sep.value);
+        txta.value = myEmails;
+        main.append(txta);
+        txta.focus();
+        txta.addEventListener('click',()=>{
+            console.log('selected');
+            txta.select();
+        })
+        downBtn = document.createElement('button');
+        downBtn.textContent = `Download ${emails.length} Emails`;
+        downBtn.classList.add('btn');
+        main.append(downBtn);
+        downBtn.addEventListener('click',()=>{
+            const fileName = 'Emails.txt';
+            const a = document.createElement('a');
+            a.setAttribute('href','data:text/plain;charset=utf-8,'+encodeURIComponent(myEmails));
+            a.setAttribute('download',fileName);
+            a.style.display='none';
+            document.body.append(a);
+            a.click();
+            document.body.removeChild(a);
+        })
+    }
+}
