@@ -1,0 +1,14 @@
+const btn = document.querySelector('button');
+const results = document.querySelector('.results');
+const myinput = document.querySelector('input');
+myinput.value = 'laurencesvekis@example.com';
+btn.addEventListener('click',()=>{
+    const regexp = /([A-Za-z0-9._-]+@[A-Za-z0-9._-]+\.[A-Za-z0-9._-]+)/gi;
+    if(regexp.test(myinput.value)){
+        results.style.color = 'green';
+        results.textContent = 'Yes its an email!'; 
+    }else{
+        results.style.color = 'red';
+        results.textContent = 'Sorry does not look like an email!'; 
+    }
+});
