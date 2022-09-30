@@ -1,0 +1,59 @@
+const str1 = 'Hello love World.  I love JavaScript!';
+const rexg = RegExp('love','g');
+const res = rexg.test(str1);
+console.log(res);
+
+const str1 = 'Hello love World.  I love JavaScript!';
+const rexg = RegExp('love','g');
+const res = rexg.exec(str1);
+console.log(res);
+
+const str1 = 'Hello love World.  I love JavaScript!';
+const rexg = RegExp('love','g');
+    while((arr = rexg.exec(str1)) !== null){
+        console.log(`found at starting index ${arr.index} ending index ${rexg.lastIndex}`);
+    }
+
+const str1 = 'Hello love World.  I love JavaScript!';
+const str2 = str1.replace('love','like');
+
+const str1 = 'Hello love World.  I love JavaScript!';
+const reg = /love/;
+const reg1 = /love/g;
+const str2 = str1.replace(reg,'enjoy');
+const str3 = str1.replace(reg1,'fun');
+
+const str1 = 'Hello love World.  I love JavaScript!';
+const reg = /love/;
+const reg1 = /love/g;
+const str2 = str1.replace(reg,'enjoy'); //This will throw an error message and not work!
+const str3 = str1.replace(reg1,'fun');
+const str4 = str.replaceAll('love','fun');
+
+const str1 = 'Hello love World.  I love JavaScript!';
+const reg = /love/i;
+const rep = str.search(reg);
+
+const str = 'hello World.  rr=@  123456 svekis.1@example.com  I love JavaScript! svekis_2@example.com  svekis-2@example.com';
+const RegExp = /(hello)/g;
+const contents = str.match(regEx);
+
+const str = 'hello World.  rr=@  123456 svekis.1@example.com  I love JavaScript! svekis_2@example.com  svekis-2@example.com';
+const RegExp = /([A-Za-z0-9._-]+)/g;
+const contents = str.match(regEx);
+
+ if(contents == null){
+        res.innerHTML = 'No match was found!';
+    }
+    else{
+        res.innerHTML = '';
+        const holder = [];
+        contents.forEach(email =>{
+            if(!holder.includes(email)){
+                holder.push(email);
+                const el = document.createElement('div');
+                el.textContent = email;
+                document.querySelector('.results').append(el);
+            }
+        })
+    }
