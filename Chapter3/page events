@@ -1,0 +1,14 @@
+const ele3 = document.querySelector('h1');
+ele3.onclick = adder1;
+ele3.onmousedown = adder1;
+ele3.onmouseup = adder1;
+function adder1(e){
+   counter++;
+   console.log(e.type);
+   e.target.textContent = `Event Type : ${e.type} ${counter}`;
+}
+
+
+    ele.addEventListener('click',()=>{
+        console.log('Clicked');
+    },{capture:true,once:true});
