@@ -1,0 +1,15 @@
+const timerVal = createEles('div',main,'','output');
+const output = createEles('div',main,'Press Start','output');
+const txtArea = createEles('input',main,'','txtArea');
+txtArea.setAttribute('type','text');
+txtArea.style.display = 'none';
+const btn = createEles('button',main,'Start','btn');
+
+function createEles(t,p,html,cla){
+   const ele = document.createElement(t);
+   ele.innerHTML = html;
+   ele.classList.add(cla);
+   return p.appendChild(ele);
+}
+
+
