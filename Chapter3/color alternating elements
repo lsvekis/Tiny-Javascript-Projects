@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript DOM</title>
+  <style>
+    .red{
+      color:red;
+    }
+    .blue{
+      color:blue;
+    }
+  </style>
+</head>
+<body>
+    <h1>Laurence Svekis</h1>
+    <script src="/js/app.js"></script>
+</body>
+</html>
+
+const h1 = document.querySelector('h1');
+h1.onclick = ()=>{
+    if(h1.classList.contains('blue')){
+        h1.classList.remove('blue');}
+    else if(h1.classList.contains('red')){
+        h1.classList.replace('red','blue');
+    }else{
+        h1.classList.add('red');
+    }
+}
