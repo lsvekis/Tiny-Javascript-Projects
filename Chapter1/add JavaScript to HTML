@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>JavaScript Course</title>   
+  </head>
+  <body>
+      <div class="output">Output 1</div>
+      <script>
+          console.log('Hello');
+      </script>
+  </body>
+</html>
