@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Storage</title>
+</head>
+<body>
+    <div class="output"></div>
+    <input type="text">
+    <button class="btn1">Save</button>
+    <button class="btn2">Clear</button>
+    <script src="app1.js"></script>
+</body>
+</html>
+
+const output = document.querySelector('.output');
+const myInput = document.querySelector('input');
+const myBtn1 = document.querySelector('.btn1');
+const myBtn2 = document.querySelector('.btn2');
+const keyStore = 'myName';
+
+
+window.addEventListener('DOMContentLoaded',(e)=>{
+    let getData = localStorage.getItem(keyStore);
+    console.log(getData);
+    let userMessage = 'Hello, please enter your name below.';
+    if(getData){
+        userMessage = `Welcome back, ${getData}`;
+    }
+    output.textContent = userMessage;
+})
+
+myBtn1.addEventListener('click',(e)=>{
+    let userName = myInput.value;
+    if(userName.length > 3){
+        localStorage.setItem(keyStore,myInput.value);
+        output.textContent = `${userName} will be saved`;
+        myInput.value = '';
+    }
+})
+myBtn2.addEventListener('click',()=>{
+    localStorage.clear();
+})
+function updater(){
+    const myListItems = document.querySelectorAll('.info');
+    curList.length = 0;
+    myListItems.forEach((el)=>{
+        curList.push(el.textContent);
+    })
+    
+}
