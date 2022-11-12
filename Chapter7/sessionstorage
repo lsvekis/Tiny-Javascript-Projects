@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Storage</title>
+</head>
+<body>
+    <div class="output"></div>
+    <input type="text">
+    <script src="app2.js"></script>
+</body>
+</html>
+
+const output = document.querySelector('.output');
+const myInput = document.querySelector('input');
+const keyStore = 'myName';
+let val = sessionStorage.getItem(keyStore);
+if(val){
+    output.textContent = `found value`;
+    myInput.value = val;
+}
+
+myInput.addEventListener('change',()=>{
+    output.textContent = 'saved';
+    sessionStorage.setItem(keyStore,myInput.value);
+})
