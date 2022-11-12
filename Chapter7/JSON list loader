@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List Storage</title>
+    <style>
+        .main{
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr;
+        }
+        .box{
+            border-top:1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="output"></div>
+    <div class="adder"></div>
+    <script src="app4.js"></script>
+</body>
+</html>
+
+const url = "list1.json";
+const output = document.querySelector('.output');
+const adder = document.querySelector('.adder');
+
+window.addEventListener('DOMContentLoaded',(e)=>{
+    let getData = localStorage.getItem('curList');
+    if(!getData){
+        getmyList();
+    }
+})
+
+function getmyList(){
+    fetch(url)
+    .then(res => res.json())
+    .then(json =>{
+        createList(json);
+    })
+}
+
+function createList(data){
+    output.innerHTML = '';
+    let total = 0;
+    data.forEach((ele) =>{
+        addNewItem(ele);
+        total += ele.qty * ele.cost;
+    })
+    const headers = {"name":" ","qty":"Total","cost":total};
+    addNewItem(headers);
+}
+
+function addNewItem(item){
+    const main = createMyElement(output,'div','main','');
+    const box1 = createMyElement(main,'span','box',item.name);
+    const box2 = createMyElement(main,'span','box',item.qty);
+    const box3 = createMyElement(main,'span','box',`$${item.cost}`);
+}
+
+function createMyElement(parent,elType,classAdd,html){
+    const ele = document.createElement(elType);
+    ele.classList.add(classAdd);
+    ele.innerHTML = html;
+    return parent.appendChild(ele);
+}
