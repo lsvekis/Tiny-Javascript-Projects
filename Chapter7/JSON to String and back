@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List Storage</title>
+    <style>
+        .main{
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr;
+        }
+        .box{
+            border-top:1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="output"></div>
+    <input type="text">
+    <input type="number">
+    <button class="btn1">Add</button>
+    <script src="app6.js"></script>
+</body>
+</html>
+const curListFirst = [{name:"banana",cost:1},{name:"milk",cost:7}];
+const output = document.querySelector('.output');
+const keyStore = 'myList1';
+const curList = [];
+let getData = localStorage.getItem(keyStore);
+
+console.log(getData);
+if(getData){
+    const tempArr = JSON.parse(getData);
+    tempArr.forEach((v)=> {curList.push(v)});
+}else{
+    curListFirst.forEach((v)=> {curList.push(v)});
+}
+curList.forEach(item => {
+    addNewItem(item)
+})
+localStorage.setItem(keyStore,JSON.stringify(curList));
+
+function addNewItem(item){
+    const main = createMyElement(output,'div','main','');
+    const box1 = createMyElement(main,'span','box',item.name);
+    const box2 = createMyElement(main,'span','box',`$${item.cost}`);
+}
+
+function createMyElement(parent,elType,classAdd,html){
+    const ele = document.createElement(elType);
+    ele.classList.add(classAdd);
+    ele.innerHTML = html;
+    return parent.appendChild(ele);
+}
