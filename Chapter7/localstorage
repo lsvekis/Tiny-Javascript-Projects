@@ -40,11 +40,4 @@ myBtn1.addEventListener('click',(e)=>{
 myBtn2.addEventListener('click',()=>{
     localStorage.clear();
 })
-function updater(){
-    const myListItems = document.querySelectorAll('.info');
-    curList.length = 0;
-    myListItems.forEach((el)=>{
-        curList.push(el.textContent);
-    })
-    
-}
+
