@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List Storage</title>
+</head>
+<body>
+    <div class="output"></div>
+    <input type="text">
+    <button class="btn1">add</button>
+    <script src="app3.js"></script>
+</body>
+</html>
+
+const curList = ['apple','orange','banana'];
+const output = document.querySelector('.output');
+const myInput = document.querySelector('input');
+const myBtn1 = document.querySelector('.btn1');
+buildList();
+
+myBtn1.addEventListener('click',(e)=>{
+    let newVal = myInput.value;
+    if(newVal .length > 3){
+        curList.push(newVal);
+        buildList();
+        myInput.value = '';
+    }
+})
+
+
+function buildList(){
+    output.innerHTML = '';
+    curList.forEach((ele,ind) =>{
+        const val = createMyElement(output,'div','listed',`${ind+1}. ${ele}`);
+    })
+}
+
+function createMyElement(parent,elType,classAdd,html){
+    const ele = document.createElement(elType);
+    ele.classList.add(classAdd);
+    ele.innerHTML = html;
+    return parent.appendChild(ele);
+}
