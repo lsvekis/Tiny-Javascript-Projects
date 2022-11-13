@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List Storage</title>
+    <style>
+        .main{
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr;
+        }
+        .box{
+            border-top:1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="output"></div>
+    <input type="text">
+    <input type="number">
+    <button class="btn1">Add</button>
+    <script src="app5.js"></script>
+</body>
+</html>
+
+const curList = [];
+const output = document.querySelector('.output');
+const myItem = document.querySelector('input[type="text"]');
+const myCost = document.querySelector('input[type="number"]');
+const myBtn1 = document.querySelector('.btn1');
+const keyStore = 'myList1';
+
+
+let getData = localStorage.getItem(keyStore);
+if(getData){
+    const tempArr = JSON.parse(getData);
+    tempArr.forEach((v)=> {curList.push(v)});
+}
+buildList();
+
+myBtn1.addEventListener('click',(e)=>{
+    let newVal = {name:myItem.value,cost:myCost.value};
+    curList.push(newVal);
+    buildList();
+    localStorage.setItem(keyStore,JSON.stringify(curList));
+})
+
+function buildList(){
+    myItem.value = `Item ${curList.length+1}`;
+    myCost.value = '0';
+    output.innerHTML = '';
+    let total = 0;
+    curList.forEach(item =>{
+        const el = addNewItem(item);
+        total += Number(item.cost);
+    })
+    addNewItem({name:'Total',cost:total});
+}
+
+function addNewItem(item){
+    const main = createMyElement(output,'div','main','');
+    const box1 = createMyElement(main,'span','box',item.name);
+    const box2 = createMyElement(main,'span','box',`$${item.cost}`);
+}
+
+function createMyElement(parent,elType,classAdd,html){
+    const ele = document.createElement(elType);
+    ele.classList.add(classAdd);
+    ele.innerHTML = html;
+    return parent.appendChild(ele);
+}
