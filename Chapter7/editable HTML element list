@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List Storage</title>
+    <style>
+        .btn{
+            font-size:0.5em;
+            color:#ccc;
+            text-transform:capitalize;
+        }
+        .listItem{
+            padding:0 5px;
+        }
+        .editItem {
+            border-bottom:1px solid red;
+            background-color:#ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="output"></div>
+    <script src="app7.js"></script>
+</body>
+</html>
+
+const curList = ['apple','orange','banana'];
+const output = document.querySelector('.output');
+buildList();
+
+function buildList(){
+    output.innerHTML = '';
+    curList.forEach((ele,ind) =>{
+        const wrapper = createMyElement(output,'div','wrapper','');
+        const val = createMyElement(wrapper,'span','listItem',`${ind+1}. ${ele}`);
+        const editBtn = createMyElement(wrapper,'button','btn','edit');
+        editBtn.addEventListener('click',(e)=>{
+            if(editBtn.textContent === 'edit'){
+                val.classList.add('editItem');
+                val.setAttribute('contenteditable',true);
+                editBtn.textContent = 'Save';
+                editBtn.style.backgroundColor = 'green';
+            }else{
+                val.classList.remove('editItem');
+                val.setAttribute('contenteditable',false);
+                editBtn.textContent = 'edit';  
+                editBtn.style.backgroundColor = ''; 
+            }
+        })
+    })
+}
+
+function createMyElement(parent,elType,classAdd,html){
+    const ele = document.createElement(elType);
+    ele.classList.add(classAdd);
+    ele.innerHTML = html;
+    return parent.appendChild(ele);
+}
