@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Star Rater</title>
+
+</head>
+<body>
+    <div class="stars" data-value="Course 1"></div>
+    <div class="stars" data-value="Course 2"></div>
+    <div class="stars" data-value="Course 3"></div>
+    <script src="app.js"></script>
+</body>
+</html>
+
+
+const starContainers = document.querySelectorAll('.stars');
+const url = '****tester.php';
+starContainers.forEach((el) => {
+    const starsUL = createElements(el, 'ul', 'main');
+    starsUL.style.listStyleType = 'none';
+    starsUL.style.padding = '0';
+    const output = createElements(el, 'div', 'output');
+    for (let x = 0; x < 5; x++) {
+        const star = createElements(starsUL, 'li', 'star');
+        star.innerHTML = '&#9734;';
+        star.style.display = 'inline-block';
+        star.style.color = '#ddd';
+        star.starValue = (x + 1);
+        console.dir(star);
+        ["mouseover", "mouseout", "click", "dblclick"].forEach((ele) => {
+            star.addEventListener(ele, starRate);
+        })
+    }
+})
+
+function starRate(e) {
+    const parent = e.target.closest('.stars');
+    const output = parent.querySelector('.output');
+    const curStars = parent.querySelectorAll('.star');
+    switch (e.type) {
+        case 'click':
+            addColor(curStars, e.target.starValue);
+            output.innerHTML = `You Rated this ${e.target.starValue} stars`;
+            break;
+        case 'mouseover':
+            highLightColor(curStars, e.target.starValue);
+            break;
+        case 'mouseout':
+            reLightColor(curStars);
+            break;
+        case 'dblclick':
+            sendStar(parent, e.target.starValue);
+            break;
+    }
+}
+
+function sendStar(parent, val) {
+    const temp = {};
+    temp[parent.dataset.value] = val;
+    fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(temp)
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data)
+        });
+}
+
+function reLightColor(curStars) {
+    curStars.forEach((star) => {
+        if (star.innerHTML == '&#9733;') {
+            star.style.color = '#ddd';
+        } else {
+            star.style.color = 'orange';
+        }
+    }
+    )
+}
+
+function highLightColor(curStars, val) {
+    curStars.forEach((star, index) => {
+        if (index < val) {
+            star.style.color = 'yellow';
+        } else {
+            star.style.color = '#ddd';
+        }
+    }
+    )
+}
+
+function addColor(curStars, val) {
+    curStars.forEach((star, index) => {
+        if (index < val) {
+            star.innerHTML = '&#9733;';
+            star.style.color = 'orange';
+        } else {
+            star.innerHTML = '&#9734;';
+            star.style.color = '#ddd';
+        }
+    })
+}
+
+function createElements(parent, elType, myClass) {
+    const el = document.createElement(elType);
+    el.classList.add(myClass);
+    return parent.appendChild(el);
+}
