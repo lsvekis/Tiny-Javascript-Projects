@@ -1,0 +1,73 @@
+<style>
+.output{
+    text-align: center;
+    font-size:2em;
+}
+.btn{
+    display: block;
+    min-width:200px;
+    margin:20px auto;
+    font-size:1.2em;
+}
+</style>
+<div class="output"></div>
+
+
+const output = document.querySelector('.output');
+const game = { timer: true, start: 0, int: null, overallTime: 0, currentTime: 0 };
+const overallTime = createElements(output, 'div', 'message');
+const currentTime = createElements(output, 'div', 'message');
+const btn = createElements(output, 'button', 'btn');
+const btn1 = createElements(output, 'button', 'btn');
+
+btn.textContent = 'Click Me';
+btn1.textContent = 'Reset';
+
+scoreOutput();
+function scoreOutput() {
+    overallTime.textContent = `OverAll Time : ${makeOutput(game.overallTime)}`;
+    currentTime.textContent = `Current Time : ${makeOutput(game.currentTime)}`;
+}
+function makeOutput(val) {
+    const mseconds = val % 1000;
+    const seconds = Math.floor(val / 1000);
+    return `${seconds}.${mseconds}`;
+}
+
+btn.addEventListener('click', playGame);
+btn1.addEventListener('click', () => {
+    game.overallTime = 0;
+    game.currentTime = 0;
+    scoreOutput();
+})
+
+function playGame() {
+    if (game.timer) {
+        game.start = new Date().getTime();
+        showCounter();
+        game.timer = false;
+        btn.style.backgroundColor = 'red';
+    } else {
+        game.timer = true;
+        btn.style.backgroundColor = '';
+        clearInterval(game.int);
+        game.overallTime = game.overallTime + game.passed;
+        game.currentTime = game.passed;
+        scoreOutput();
+        btn.textContent = 'Click me';
+    }
+}
+
+function showCounter() {
+    game.int = setInterval(function () {
+        game.now = new Date().getTime();
+        game.passed = game.now - game.start;
+        btn.textContent = makeOutput(game.passed);
+    }, 1);
+}
+
+function createElements(parent, elType, myClass) {
+    const el = document.createElement(elType);
+    el.classList.add(myClass);
+    return parent.appendChild(el);;
+}
