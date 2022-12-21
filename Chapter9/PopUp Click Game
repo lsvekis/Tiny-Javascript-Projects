@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Click Me Game</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        .output {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            width: 100vw;
+            height: 90vh;
+            background: #ddd;
+        }
+        .message{
+            text-align: center;
+            font-size:2em;
+        }
+        .box {
+            position: absolute;
+            background-color: red;
+        }
+   
+    </style>
+</head>
+
+<body>
+    <div class="output"></div>
+    <script src="apps.js"></script>
+</body>
+
+</html>
+
+const output = document.querySelector('.output');
+const messageOut = createElements(document.body, 'div', 'message');
+const box = createElements(output,'div','box');
+
+const game = {timer:null,start:null,score:0,best:10000};
+box.style.display = 'none';
+messageOut.textContent = 'Click Anywhere to Begin!';
+output.addEventListener('click',startGame,{once:true})
+box.addEventListener('click',(e)=>{
+    box.style.display = 'none';
+    const cur = new Date().getTime();
+    game.score = (cur - game.start);
+    if(game.best > game.score){game.best = game.score}
+    startGame();
+})
+
+function startGame(){
+    if(game.start){
+        messageOut.textContent = `Your last score was ${game.score}, game started again!  Current best score is ${game.best}`;
+    }else{
+        messageOut.textContent = `Game is started click the box when it appears`;
+    }
+    game.timer = setTimeout(showBox, ranNum(3000));
+    game.start = new Date().getTime(); 
+}
+
+function showBox(){
+    const container = output.getBoundingClientRect();  
+    console.log(container);
+    const dim = [ranNum(50) + 50, ranNum(50) + 20];
+    box.style.display = 'block';
+    box.style.width = dim[0] + 'px';
+    box.style.height = dim[1] + 'px';
+    box.style.backgroundColor = '#'+Math.random().toString(16).slice(-6);
+    box.style.left = ranNum(container.width - dim[0]) + 'px'; 
+    box.style.top = ranNum(container.height - dim[1]) + 'px'; 
+}
+
+function ranNum(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function createElements(parent, elType, myClass) {
+    const el = document.createElement(elType);
+    el.classList.add(myClass);
+    return parent.appendChild(el);;
+}
