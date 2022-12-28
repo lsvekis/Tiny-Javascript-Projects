@@ -1,0 +1,23 @@
+const output = document.querySelector('.output');
+const num = 25;
+const holder = {};
+for(let x=0;x<num;x++){
+    const box = document.createElement('div');
+    output.appendChild(box);
+    box.style.backgroundColor = '#'+Math.random().toString(16).slice(-6);
+    box.addEventListener('click',()=>{
+        box.style.opacity = 1;
+        holder[x] = setInterval(hideMe,20,box,x);
+    })
+}
+
+function hideMe(ele,val){
+    let opa = Number(ele.style.opacity);
+    if(opa> 0 ){
+        opa -= 0.05;
+        ele.style.opacity = opa;
+    }else{
+        clearInterval(holder[val]);
+        ele.style.display = 'none';
+    }
+}
