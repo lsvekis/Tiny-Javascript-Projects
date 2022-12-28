@@ -1,0 +1,22 @@
+const output = document.querySelector('.output');
+const num = 25;
+
+for(let x=0;x<num;x++){
+    const box = document.createElement('div');
+    output.appendChild(box);
+    box.style.backgroundColor = '#'+Math.random().toString(16).slice(-6);
+    box.addEventListener('click',()=>{
+        box.style.opacity = 0;
+        box.style.transition = 'opacity 400ms';
+    })
+}
+
+
+        .output {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            width: 100vw;
+            height: 90vh;
+            background: #ddd;
+        }
