@@ -1,0 +1,114 @@
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .output {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            width: 100vw;
+            height: 90vh;
+            background: #ddd;
+        }
+
+        .box {
+            text-align: center;
+            font-size: 2em;
+            position: absolute;
+        }
+
+        .btn {
+            position: relative;
+            width: 300px;
+            margin: auto;
+            border: 1px solid black;
+        }
+
+        .timer {
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 2em;
+        }
+        
+        
+        const output = document.querySelector('.output');
+const game = { timer: 0, start: null, counter: 1, best: 10, val: 0, arr: [], rounds: 3, int: {} };
+const timeMessage = createElements(document.body, 'div', 'timer');
+timeMessage.textContent = '-';
+const message = createElements(document.body, 'div', 'message');
+message.textContent = 'Click button to Start Game';
+
+const box = createElements(output, 'div', 'box');
+box.textContent = 'Start Game';
+box.classList.add('btn');
+box.addEventListener('click', playGame);
+
+function playGame() {
+    box.style.display = 'none';
+    box.textContent = `-${game.counter}-`;
+    game.timer = setTimeout(addBox, ranNum(3000));
+    if (!game.start) {
+        box.classList.remove('btn');
+        message.textContent = 'Watch for the element and click it quickly';
+    } else {
+        const cur = new Date().getTime();
+        const dur = (cur - game.start) / 1000;
+        clearInterval(game.int);
+        if (dur < game.best) {
+            game.best = dur;
+            game.val = game.counter;
+        }
+
+        message.textContent = `It took ${dur} seconds to click.  Best time so far is ${game.best} (${game.val})`;
+        game.arr.push({ score: dur, round: game.counter });
+        game.start = false;
+        game.counter++;
+        game.rounds--;
+        if (game.rounds <= 0) {
+
+            console.table(game.arr);
+        }
+    }
+}
+function showCounter() {
+    game.int = setInterval(function () {
+        const now = new Date().getTime();
+        const passed = now - game.start;
+        const mseconds = passed % 1000;
+        const seconds = Math.floor(passed / 1000);
+        timeMessage.textContent = `${seconds}.${mseconds}`;
+    }, 1);
+}
+
+
+function addBox() {
+    game.start = new Date().getTime();
+    const container = output.getBoundingClientRect();
+    const dim = [ranNum(50) + 50, ranNum(50) + 20];
+    box.style.display = 'block';
+    box.style.width = dim[0] + 'px';
+    box.style.height = dim[1] + 'px';
+    box.style.lineHeight = dim[1] + 'px';
+    box.style.backgroundColor = '#' +
+        Math.random().toString(16).slice(-6);
+    box.style.left = ranNum(container.width - dim[0]) + 'px'; box.style.top = ranNum(container.height - dim[1]) + 'px'; box.style.borderRadius = ranNum(30) + '%';
+    showCounter();
+    //box.style.left = ranNum(); 
+}
+
+
+function createElements(parent, elType, myClass) {
+    const el = document.createElement(elType);
+    el.classList.add(myClass);
+    parent.append(el);
+    return el;
+}
+
+function ranNum(max) {
+    return Math.floor(Math.random() * max);
+}
+
