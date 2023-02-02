@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learn JavaScript</title>
+    <style>
+      #gallery{
+        width:70%;
+        margin:auto;
+      }
+      #gallery img{
+        display:block;
+        width:100%;
+      }
+      .btns{
+        text-align: center;
+      }
+    </style>
+</head>
+<body>
+    <div id="gallery">
+        <img src="one.jpg" >
+        <div class="btns">
+          <button id="prev-button">Prev</button>
+          <button id="next-button">Next</button>
+        </div>
+      </div>
+      
+      <script>
+        const images = ["one.jpg", "two.jpg", "three.jpg", "four.jpg"];
+        let curIndex = 0;
+      
+        const gallery = document.querySelector("#gallery");
+        const curImage = gallery.querySelector("img");
+        const prevButton = gallery.querySelector("#prev-button");
+        const nextButton = gallery.querySelector("#next-button");
+      
+        prevButton.addEventListener("click", function() {
+          curIndex--;
+          if (curIndex < 0) {
+            curIndex = images.length - 1;
+          }
+          curImage.src = images[curIndex];
+        });
+      
+        nextButton.addEventListener("click", function() {
+          curIndex++;
+          if (curIndex >= images.length) {
+            curIndex = 0;
+          }
+          curImage.src = images[curIndex];
+        });
+      </script>
+      
+</body>
+</html>
