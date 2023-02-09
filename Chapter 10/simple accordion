@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Learn JavaScript</title>
+    <style>
+        .panel {
+            max-height: 0;
+            transition: max-height .5s ease-out;
+            overflow: hidden;
+            background: #d5d5d5;
+        }
+
+        .active {
+            color: #d5d5d5;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Learn JavaScript Course </h1>
+    <button class="accordion">Section 1</button>
+    <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+    <button class="accordion">Section 2</button>
+    <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+    <div class="output"></div>
+    <script>
+        const acc = document.querySelectorAll('.accordion');
+        acc.forEach(ele => {
+            ele.addEventListener('click', () => {
+                const panel = ele.nextElementSibling;
+                ele.classList.toggle("active");
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
