@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My Website</title>
+  <style>
+    .overlay {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modalContent {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 10px;
+      border: 1px solid black;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 5px;
+    }
+
+    .close {
+      color: #ccc;
+      float: right;
+      font-size: 1.5em;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <button id="myBtn">Open Modal</button>
+  <button id="myBtn2">Open Modal2</button>
+  <div id="myModal" class="overlay">
+    <div class="modalContent">
+      <span class="close">&times;</span>
+      <h2>Modal Header</h2>
+      <p>Modal content goes here.</p>
+    </div>
+  </div>
+  <div id="myModal2" class="overlay">
+    <div class="modalContent">
+      <span class="close">&times;</span>
+      <h2>Modal Header</h2>
+      <p>Modal content goes here.</p>
+    </div>
+  </div>
+  <script>
+    const modal = document.querySelector("#myModal");
+    const btn = document.querySelector("#myBtn");
+    const closers = document.querySelectorAll('.close');
+    const overlays = document.querySelectorAll('.overlay');
+
+    const modal2 = document.querySelector("#myModal2");
+    const btn2 = document.querySelector("#myBtn2");
+    btn2.onclick = function () {
+      modal2.style.display = "block";
+    }
+
+    btn.onclick = function () {
+      modal.style.display = "block";
+    }
+    closers.forEach((ele) => {
+      ele.onclick = function () {
+        const parent = ele.closest('.overlay');
+        parent.style.display = "none";
+      }
+    });
+
+    window.onclick = function (event) {
+      overlays.forEach(ele => {
+        if (event.target == ele) {
+          ele.style.display = "none";
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>
