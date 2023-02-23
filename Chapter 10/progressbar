@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My Website</title>
+  <style>
+    .progressContainer {
+      width: 100%;
+      height: 20px;
+      background-color: #f2f2f2;
+      padding: 5px;
+    }
+
+    .progressBar {
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease-in-out;
+    }
+
+    .green {
+      background-color: green;
+    }
+
+    .red {
+      background-color: red;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="progressContainer">
+    <div class="progressBar green" aria-valuenow="50"></div>
+  </div>
+  <div class="progressContainer">
+    <div class="progressBar green" aria-valuenow="10"></div>
+  </div>
+  <div class="progressContainer">
+    <div class="progressBar red" aria-valuenow="44"></div>
+  </div>
+  <div class="progressContainer">
+    <div class="progressBar green" aria-valuenow="88"></div>
+  </div>
+  <script>
+    const progress = document.querySelectorAll('.progressBar');
+    progress.forEach(ele => {
+      const val = ele.ariaValueNow;
+      ele.style.width = val + "%";
+    })
+    function updateProgressBar(val, ele) {
+      ele.style.width = val + "%";
+    }
+    updateProgressBar(60, progress[0]); 
+  </script>
+</body>
+
+</html>
